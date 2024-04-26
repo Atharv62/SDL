@@ -1,0 +1,67 @@
+data.xml
+
+<root>
+    <person>
+        <name>Atharv Nikam</name>
+        <age>20</age>
+        <email>atharv@gmail.com</email>
+    </person>
+    <person>
+        <name>Harshal Naik</name>
+        <age>20</age>
+        <email>harshal@gmail.com</email>
+    </person>
+    <person>
+        <name>Piyush Hole</name>
+        <age>20</age>
+        <email>piyush@gmail.com</email>
+    </person>
+    <person>
+        <name>Mohit Charje</name>
+        <age>20</age>
+        <email>mohit@gmail.com</email>
+    </person>
+</root>
+--------------------------------------------------------------------------
+schema.xsd
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="root">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="person" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="person">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="age" type="xs:positiveInteger"/>
+                <xs:element name="email" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+------------------------------------------------------------------------------
+validate_xml.py 
+from lxml import etree
+
+def validate_xml(xml_url, schema_url):
+    # Parse XML Schema
+    schema = etree.XMLSchema(etree.parse(schema_url))
+
+    # Parse XML data
+    root = etree.parse(xml_url)
+
+    # Validate the XML data against the schema
+    if schema.validate(root):
+        print(f"xml is valid.")
+    else:
+        print(f"xml is not valid.")
+        print(schema.error_log)
+
+xml_url = 'data.xml' //add URL
+schema_url = 'schema.xsd' //add URL
+
+validate_xml(xml_url, schema_url)

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Tasks</title>
+</head>
+
+<body>
+
+    <h1>JavaScript Tasks</h1>
+
+    <button id="showInfoBtn">Show Information</button>
+
+    <div id="infoContainer"></div>
+
+    <script>
+        // Put an alert
+        alert('Welcome to JavaScript Tasks!');
+
+        // Calculate the average number of weeks in a human lifetime
+        function calculateLifetimeWeeks() {
+            var averageLifeSpanYears = 79;
+            var weeksInYear = 52;
+            var averageWeeksInLifetime = averageLifeSpanYears * weeksInYear;
+            return averageWeeksInLifetime;
+        }
+
+        var averageWeeks = calculateLifetimeWeeks();
+
+        // Create variables to store strings
+        var greeting = 'Hello, world!';
+        var message = 'This is a JavaScript task.';
+
+        // Program that tells the time of the day (morning, afternoon, night)
+        function getTimeOfDay() {
+            var currentTime = new Date().getHours();
+            var timeOfDay;
+            if (currentTime >= 5 && currentTime < 12) {
+                timeOfDay = 'morning';
+            } else if (currentTime >= 12 && currentTime < 18) {
+                timeOfDay = 'afternoon';
+            } else {
+                timeOfDay = 'night';
+            }
+            return timeOfDay;
+        }
+
+        var currentPartOfDay = getTimeOfDay();
+
+        // Function to display information
+        function displayInformation() {
+            var infoContainer = document.getElementById('infoContainer');
+            infoContainer.innerHTML = `
+        <p>Average weeks in a human lifetime: ${averageWeeks}</p>
+        <p>${greeting}</p>
+        <p>${message}</p>
+        <p>It is currently ${currentPartOfDay}</p>
+    `;
+        }
+
+        // Event listener for the button
+        document.getElementById('showInfoBtn').addEventListener('click', displayInformation);
+
+    </script>
+</body>
+
+</html>

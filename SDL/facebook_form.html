@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4267B2;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3b5998;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Facebook Registration</h2>
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" onblur="validateFirstName()">
+            <div id="firstNameError" class="error"></div>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" onblur="validateLastName()">
+            <div id="lastNameError" class="error"></div>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" onblur="validateEmail()">
+            <div id="emailError" class="error"></div>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" onblur="validatePassword()">
+            <div id="passwordError" class="error"></div>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" onblur="validateConfirmPassword()">
+            <div id="confirmPasswordError" class="error"></div>
+
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            return (
+                validateFirstName() &&
+                validateLastName() &&
+                validateEmail() &&
+                validatePassword() &&
+                validateConfirmPassword()
+            );
+        }
+
+        function validateFirstName() {
+            var firstName = document.getElementById('firstName').value;
+            var nameRegex = /^[A-Za-z]+$/;
+            if (!firstName.trim().match(nameRegex)) {
+                document.getElementById('firstNameError').innerText = 'Name should not contain numbers or special characters';
+                return false;
+            } else {
+                document.getElementById('firstNameError').innerText = '';
+                return true;
+            }
+        }
+
+        function validateLastName() {
+            var lastName = document.getElementById('lastName').value;
+            var nameRegex = /^[A-Za-z]+$/;
+            if (!lastName.trim().match(nameRegex)) {
+                document.getElementById('lastNameError').innerText = 'Name should not contain numbers or special characters';
+                return false;
+            } else {
+                document.getElementById('lastNameError').innerText = '';
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            var email = document.getElementById('email').value;
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.trim() === '') {
+                document.getElementById('emailError').innerText = 'Email is required';
+                return false;
+            } else if (!email.match(emailRegex)) {
+                document.getElementById('emailError').innerText = 'Invalid email format';
+                return false;
+            } else {
+                document.getElementById('emailError').innerText = '';
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            var password = document.getElementById('password').value;
+            var passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+            if (password.trim() === '') {
+                document.getElementById('passwordError').innerText = 'Password is required';
+                return false;
+            } else if (!password.match(passwordRegex)) {
+                document.getElementById('passwordError').innerText = 'Password must be minimum 8 characters and include at least 1 number and 1 special character';
+                return false;
+            } else {
+                document.getElementById('passwordError').innerText = '';
+                return true;
+            }
+        }
+
+        function validateConfirmPassword() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            if (confirmPassword.trim() === '') {
+                document.getElementById('confirmPasswordError').innerText = 'Please confirm your password';
+                return false;
+            } else if (confirmPassword !== password) {
+                document.getElementById('confirmPasswordError').innerText = 'Passwords do not match';
+                return false;
+            } else {
+                document.getElementById('confirmPasswordError').innerText = '';
+                return true;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

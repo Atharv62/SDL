@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input, textarea {
+        width: calc(100% - 22px); /* Subtracting padding and border width */
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    .error {
+        color: red;
+        margin-top: 5px;
+        display: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #registrationDetails {
+        margin-top: 20px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Form</h1>
+        <form id="registrationForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            <div id="firstNameError" class="error">Please enter your first name.</div>
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <div id="lastNameError" class="error">Please enter your last name.</div>
+            <label for="organization">Organization:</label>
+            <input type="text" id="organization" name="organization" required>
+            <div id="organizationError" class="error">Please enter your organization.</div>
+            <label for="hobbies">Hobbies:</label>
+            <textarea id="hobbies" name="hobbies" rows="3" required></textarea>
+            <div id="hobbiesError" class="error">Please enter your hobbies.</div>
+            <button type="submit">Register</button>
+        </form>
+        <div id="registrationDetails">
+            <h2>Registration Details</h2>
+            <p><strong>First Name:</strong> <span id="displayFirstName"></span></p>
+            <p><strong>Last Name:</strong> <span id="displayLastName"></span></p>
+            <p><strong>Organization:</strong> <span id="displayOrganization"></span></p>
+            <p><strong>Hobbies:</strong> <span id="displayHobbies"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            var firstName = document.getElementById('firstName').value.trim();
+            var lastName = document.getElementById('lastName').value.trim();
+            var organization = document.getElementById('organization').value.trim();
+            var hobbies = document.getElementById('hobbies').value.trim();
+
+            // Field-level validation
+            var isValid = true;
+            if (firstName === '') {
+                document.getElementById('firstNameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('firstNameError').style.display = 'none';
+            }
+            if (lastName === '') {
+                document.getElementById('lastNameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('lastNameError').style.display = 'none';
+            }
+            if (organization === '') {
+                document.getElementById('organizationError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('organizationError').style.display = 'none';
+            }
+            if (hobbies === '') {
+                document.getElementById('hobbiesError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('hobbiesError').style.display = 'none';
+            }
+
+            // If form is valid, display registration details
+            if (isValid) {
+                document.getElementById('displayFirstName').textContent = firstName;
+                document.getElementById('displayLastName').textContent = lastName;
+                document.getElementById('displayOrganization').textContent = organization;
+                document.getElementById('displayHobbies').textContent = hobbies;
+                document.getElementById('registrationDetails').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
